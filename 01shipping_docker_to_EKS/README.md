@@ -215,7 +215,7 @@ a nebo můžete sáhnout po nějakém hotovém řešení.
 Tenhle workshop je ale o AWS, takže si v konzoli AWS vytvoříme nový 
 privátní Elastic Container Registry rpozitář.
 
-![ecr01](./assets/CleanShot 2021-03-03 at 16.01.30@2x.png)
+![ecr01](./assets/01.png)
 
 
 
