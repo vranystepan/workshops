@@ -28,7 +28,8 @@ Tohle je scénář, co můžete občas vidět v automatizaci. Obecně asi nejde 
 jestli je dobrý nebo špatný. Má svoje místo a jeho obrovskou výhodou jsou
 krátké Dockerfile definice.
 
-V případě Go můžu dokonce použít nejmenší možný obraz, protože Go (většinou)
+V případě Go můžu dokonce použít nejmenší možný obraz (to je `scratch`,
+ale ten se moc nehodí na vzdělávací účely), protože Go (většinou)
 nevyžaduje žádné sdílené knihovny. V tomhle případě má [obraz](https://catalog.redhat.com/software/containers/ubi8/ubi-minimal/5c359a62bed8bd75a2c3fba8?gti-tabs=unauthenticated) 37MiB a my ho trochu přifoukneme naším binárním souborem.
 
 ```Dockerfile
