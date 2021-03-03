@@ -1,5 +1,27 @@
 ## Co je to vlastně Docker?
 
+Docker je nástroj, který zjednodušuje práci s Linux kontejnery.
+Jak už značí tento popis, kontejnery jsou funkcí Linux jádra.
+
+Linux kontejner není žádná magie. [Zde](https://jvns.ca/blog/2020/04/27/new-zine-how-containers-work/) se můžete podívat na jednoduchý návod,
+jak si vlastními silami rozjet kontejner bez Dockeru.
+
+> Pozor, Docker umí pracovat i s [Windows kontejnery](https://www.docker.com/products/windows-containers). Ale to je látka na úplně jiný workshop.
+
+## Je Docker ta jediná cesta?
+
+Ne. Obraz, s kterým půjde udělat nějaká paráda, můžete sestavit i jinými nástroji,
+které jsou [OCI](https://www.docker.com/blog/demystifying-open-container-initiative-oci-specifications/) kompatibilní.
+Můžeme si uvést i pár příkladů:
+
+- https://buildah.io
+- https://github.com/GoogleContainerTools/kaniko
+- https://github.com/uber/makisu
+
+Jenže Docker toho umí víc, než jen obrazy stavět. Umí je stahovat, posílat do repozitáře,
+spouštět a spoustu dalších věcí. I proto je to tak oblíbený nástroj. Umí skoro všechno.
+Podobným projektem je pak [Podman](https://podman.io) od RedHat. Ten taky umí skoro všechno.
+
 ## Dockerfile používající externě sestavenou app
 
 Tohle je scénář, co můžete občas vidět v automatizaci. Obecně asi nejde říct,
