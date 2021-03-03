@@ -202,3 +202,20 @@ jde o prefix, který dává všem obrazům, které ho nemají: `docker.io/librar
 Takže obraz apline je ve skutečnoti `docker.io/library/alpine`, ale tvůrci
 Dockeru nám usnadnili práci v případě, že používáme obrazy z jejich repozitáře.
 
+## Vlastní repozitář
+
+Vlastní repozitař na obrazy může mít každý. Můžete si někde rozjet vlastní instanci
+a nebo můžete sáhnout po nějakém hotovém řešení.
+
+- ECR https://aws.amazon.com/ecr/
+- ACR https://azure.microsoft.com/en-us/services/container-registry/
+- Quay https://quay.io
+- GCR https://cloud.google.com/container-registry
+
+Tenhle workshop je ale o AWS, takže si v konzoli AWS vytvoříme nový 
+privátní Elastic Container Registry rpozitář.
+
+![ecr01](./assets/CleanShot 2021-03-03 at 16.01.30@2x.png)
+
+
+
