@@ -178,3 +178,27 @@ závislostí?
 > Další build Docker obrazu sice sestavuje aplikaci, ale už nestahuje externí
 > závislosti. Není k tomu důvod, v souborech `go.mod` a `go.sum` se nic nezměnilo.
 
+## Metoda pojmenování obrazů a jejich vztah k repozitářům
+
+Každý obraz má svůj domov. Proto je značíme nějakým hostname prefixem,
+jménem obrau a pak tagem.
+
+Třeba takhle vypadá jeden z obrazů, které jsme používaly v předchozím kroku:
+
+```
+registry.access.redhat.com/ubi8/ubi-minimal
+```
+
+A proč mi teda funguje nálsedující příkaz, když tam není žádné doménové jméno?
+
+```
+docker run -it --rm alpine sh
+```
+
+Tady se opět vracíme k tomu, že Docker není jen nástroj na prosté skládání
+vrstev filesystému, ale vnáší do hry nějaký "názor". V tomto konkrétním případě
+jde o prefix, který dává všem obrazům, které ho nemají: `docker.io/library/`.
+
+Takže obraz apline je ve skutečnoti `docker.io/library/alpine`, ale tvůrci
+Dockeru nám usnadnili práci v případě, že používáme obrazy z jejich repozitáře.
+
