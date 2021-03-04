@@ -1,5 +1,25 @@
 # Úvod do kontejnerů a jejich cesty do Kubernetes - AWS edice
 
+**Potřebné nástroje**
+
+- AWS CLI
+- Docker for Desktop nebo Docker
+- Kubectl nebo třeba Lens
+- Libovolný textový editor
+- AWS účet
+- EKS cluster
+
+Poslední dvě věci nejsou úplně záležitosti, které by neznalý jedinec zvládl vyrobit na koleni.
+Tento workshop je koncipován tak, že EKS cluster bude zajištěn
+
+* přednášejícím
+* společností, kde se koná workshop
+
+**Časová náročnost**
+
+Odhadovaná náročnost je cca. 1 hodina. Při předváďení všech úkonů pouze instruktorem může dojít ke
+zkrácení až na 30 minut, procvičení jednotlivých úkolů pak může proběhnou asynchronně.
+
 ## Co je to vlastně Docker?
 
 Docker je nástroj, který zjednodušuje práci s Linux kontejnery.
