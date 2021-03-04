@@ -217,5 +217,71 @@ privátní Elastic Container Registry rpozitář.
 
 ![ecr01](./assets/01.png)
 
+## Tagování
+
+Náš poslední, optimalizovaný, obraz jsme sestavili s názvem `mujobraz04:mujtag`. Ale
+vzdálený repozitář nese název `123456789123.dkr.ecr.eu-west-1.amazonaws.com/mujobraz04`.
+
+Obrazu můžeme snadno přidat další název příkazem `docker tag`:
+
+```bash
+docker tag mujobraz04:mujtag 123456789123.dkr.ecr.eu-west-1.amazonaws.com/mujobraz04:mujtag
+```
+
+## Push do vzdáleného registru
+
+U takto otagovaného obrazu už Docker ví, že ho nechceme dostat do výchozího repozitáře `docker.io/library`.
+Můžeme tedy zkusit poslat všechny vrstvy do Elastic Container Registry příkazem `docker push`.
+
+```bash
+docker push 123456789123.dkr.ecr.eu-west-1.amazonaws.com/mujobraz04:mujtag
+```
+
+Jenomže ono to nejde. 
+
+```
+The push refers to repository [123456789123.dkr.ecr.eu-west-1.amazonaws.com/mujobraz04]
+e97c82fec71e: Preparing 
+04a05557bbad: Preparing 
+821b0c400fe6: Preparing 
+no basic auth credentials
+```
+
+Proč? Většinou chceme, aby do registru měl přístup jen omezený počet jedinců. Proto se musíme
+AWS Elastic Container Registry nějak prokázat.
+
+## Získání credentials do ECR
+
+Docker si přihlášení do registrů ukládá v souboru `~/.docker/config.json`. Cílový stav pro náš
+repozitář vypadá nějak takhle:
+
+```json
+{
+  "experimental" : "disabled",
+  "auths" : {
+    "123456789123.dkr.ecr.eu-west-1.amazonaws.com" : {
+        "auth": "nějaký token"
+    }
+  }
+}
+```
+
+Jak získáme token? AWS na to má příkaz, který nám takový token poskytne.
+
+```bash
+aws ecr get-login-password --region=eu-west-1
+```
+
+A pokud nechceme editovat `~/.docker/config.json` soubor ručně, 
+tak si můžeme pomoci příkazem `docker login`, který se o všechno postará:
+
+```bash
+docker login -u AWS -p $(aws ecr get-login-password --region=eu-west-1) 123456789123.dkr.ecr.eu-west-1.amazonaws.com
+```
+
+> Něco navíc: Token do ECR má omezenou platnost. Pro někoho může být otravné se
+> třeba každý den přihlašovat znovu. Tento stav lze obejít použitím credentials helperů,
+> konkrétně pro AWS ECR se používá [tento](https://github.com/awslabs/amazon-ecr-credential-helper).
+> Takový helper si ve vašem prostředí vezme AWS credentials a získá pro vás taken automaticky.
 
 
