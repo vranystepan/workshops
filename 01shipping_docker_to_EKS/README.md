@@ -284,4 +284,11 @@ docker login -u AWS -p $(aws ecr get-login-password --region=eu-west-1) 12345678
 > konkrétně pro AWS ECR se používá [tento](https://github.com/awslabs/amazon-ecr-credential-helper).
 > Takový helper si ve vašem prostředí vezme AWS credentials a získá pro vás taken automaticky.
 
+## Push do vzdáleného registru ještě jednou
+
+Takže teď Docker ví, jak se má přihlásit a my můžeme zkusit zopakovat příkaz `docker push`.
+
+```bash
+docker push 123456789123.dkr.ecr.eu-west-1.amazonaws.com/mujobraz04:mujtag
+```
 
