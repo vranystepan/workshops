@@ -368,5 +368,19 @@ kubectl apply -f kubernetes/pod.yaml
 Když chceme zjistit, jestli je pod na místě a jestli žije, stačí nám zavolat `kubectl get pod`.
 
 ```
+kubectl get pod
+NAME    READY   STATUS              RESTARTS   AGE
+hello   0/1     ContainerCreating   0          18s
+```
 
 ```
+kubectl get pod
+NAME    READY   STATUS    RESTARTS   AGE
+hello   1/1     Running   0          37s
+```
+
+## Jak se tam dostal ten obraz?
+
+Když se vrátíme k epizodě, kde se nám nepodařilo komunikovat s ECR, jakým způsobem se podařilo
+rozjet Pod s tímto obrazem v Kubernetes clusteru? Jak se tam ten virtuální stroj dostal?
+
