@@ -1,3 +1,5 @@
+# Úvod do kontejnerů a jejich cesty do Kubernetes - AWS edice
+
 ## Co je to vlastně Docker?
 
 Docker je nástroj, který zjednodušuje práci s Linux kontejnery.
@@ -292,3 +294,79 @@ Takže teď Docker ví, jak se má přihlásit a my můžeme zkusit zopakovat p�
 docker push 123456789123.dkr.ecr.eu-west-1.amazonaws.com/mujobraz04:mujtag
 ```
 
+Je to tam 🎉 
+
+## Přihlášení do EKS
+
+Kubernetes jako takové není předmětem tohoto workshopu. Proto si jen zjednodušeně vysvětlíme,
+jak je AWS připravené na přihlašování uživatelů do jejich managed Kubernetes služby.
+
+Stejně, jako v případě ECR, i tady máme nějaký helper, který nám vygeneruje credentials
+pro danou službu.
+
+```bash
+aws eks update-kubeconfig --name cluster-eu-west-1
+```
+
+To je všechno. Tenhle helper zapíše do `~/.kube/config` a pak každý Kubernetes klient
+(`kubectl`, `Go SDK`, `LENS`, ...) ví, jak se má do daného clusteru připojit.
+
+Funkčnost si můžeme ověřit třeba takto:
+
+```
+kubectl get nodes
+NAME                                         STATUS   ROLES    AGE     VERSION
+ip-10-0-160-131.eu-west-1.compute.internal   Ready    <none>   94m     v1.17.7-eks-bffbac
+ip-10-0-160-133.eu-west-1.compute.internal   Ready    <none>   54m     v1.17.7-eks-bffbac
+ip-10-0-160-22.eu-west-1.compute.internal    Ready    <none>   3h7m    v1.17.7-eks-bffbac
+ip-10-0-160-27.eu-west-1.compute.internal    Ready    <none>   54m     v1.17.7-eks-bffbac
+ip-10-0-160-47.eu-west-1.compute.internal    Ready    <none>   3h7m    v1.17.7-eks-bffbac
+ip-10-0-160-87.eu-west-1.compute.internal    Ready    <none>   3h7m    v1.17.7-eks-bffbac
+ip-10-0-161-193.eu-west-1.compute.internal   Ready    <none>   23h     v1.17.7-eks-bffbac
+ip-10-0-161-215.eu-west-1.compute.internal   Ready    <none>   119s    v1.17.7-eks-bffbac
+```
+
+## Přihlášení do EKS trochu jinak
+
+Kubernetes není zrovna jednoduchý nástroj. Pro zjednodušení se do jeho útrob můžeme podívat třeba
+nástrojem [LENS](https://k8slens.dev), který nám může pomoci znázornit celou tu směs různých
+APIs.
+
+![ecr01](./assets/02.png)
+
+## Vytvoření prvního podu
+
+Pod je v Kubernetes základním výpočetním prvkem. Všechny složitější (compute) objekty jsou složeny právě
+z Podů. Jeho API má vcelku jednoduchou syntaxi, a tak si jeden vytvoříme.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  containers:
+    - name: hello
+      image: 123456789123.dkr.ecr.eu-west-1.amazonaws.com/mujobraz04:mujtag
+      ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+```
+
+Takto vytvořenou specifikaci podu můžeme snadno proměnit v něco skutečného jednoduchým
+aplikováním změn:
+
+```bash
+kubectl apply -f kubernetes/pod.yaml
+```
+
+## Zobrazení stavu podu
+
+Když chceme zjistit, jestli je pod na místě a jestli žije, stačí nám zavolat `kubectl get pod`.
+
+```
+
+```
