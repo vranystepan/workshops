@@ -384,3 +384,12 @@ hello   1/1     Running   0          37s
 Když se vrátíme k epizodě, kde se nám nepodařilo komunikovat s ECR, jakým způsobem se podařilo
 rozjet Pod s tímto obrazem v Kubernetes clusteru? Jak se tam ten virtuální stroj dostal?
 
+Virtuální stroj běžící ve stejném AWS účtu nemá žádná speciální práva. Pokud ho chceme pustit do
+Elastic Container Registry - někdo mu to musí povolit.
+
+Bez zabíhání do relativně komplikované problematiky Amazon IAM to shrnu jednou větou:
+
+> Každý server v AWS má svojí identitu, které někdo musí povolit operace s Elastic Container Registry
+> i dalšími službami v rámci AWS.
+
+![ecr01](./assets/03.png)
