@@ -8,7 +8,7 @@ spec:
   restartPolicy: OnFailure
   containers:
   - name: muj-container
-    image: alpine:latesttttt
+    image: alpine:latest
     command:
     - /bin/sh
     - -c
