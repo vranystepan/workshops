@@ -6,6 +6,10 @@ Co je to vlastně Kubernetes? Může pomoci
 [tento](https://platform9.com/blog/kubernetes-enterprise-chapter-2-kubernetes-architecture-concepts/) nákres.
 Je to vlastně nějaký nástroj, který řídí hromadu serverů s nějakým container runtime.
 
+A pak ještě spousta dalších, komplikovanějších věcí, třeba
+- [Networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+- [Storage](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/)
+
 ## Ukázkové scénáře
 
 ### neexistující obraz
@@ -43,7 +47,7 @@ index caaeb74..d6dfb71 100644
    - name: muj-container
 -    image: alpine:latesttttt
 +    image: alpine:latest
-```
+``` 
 
 **Čistka**
 
