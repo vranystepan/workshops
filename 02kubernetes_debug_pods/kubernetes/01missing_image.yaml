@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: muj01
+  labels:
+    app: muj01
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: muj-container
+    image: alpine:latesttttt
+    command:
+    - /bin/sh
+    - -c
+    - |
+      sleep infinity

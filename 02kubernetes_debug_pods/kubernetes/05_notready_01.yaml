@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: muj05
+  labels:
+    app: muj05
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: muj-container
+    image: nginx
+    readinessProbe:
+      httpGet:
+        path: /healthz
+        port: http

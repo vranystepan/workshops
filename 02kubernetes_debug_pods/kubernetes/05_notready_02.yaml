@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: muj05
+  labels:
+    app: muj05
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: muj-container
+    image: nginx
+    ports:
+      - name: http
+        containerPort: 80
+    readinessProbe:
+      httpGet:
+        path: /healthz
+        port: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: muj05
+spec:
+  selector:
+    app: muj05
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80

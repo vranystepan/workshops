@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: muj03-env-config
+data:
+  CONFIG_DATABASE_HOST: sub.domena.tld
+  CONFIG_DATABASE_PORT: "1234"
+  CONFIG_DATABASE_USER: "root"
+  CONFIG_DATABASE_PASSWORD: "toor"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: muj03
+  labels:
+    app: muj03
+spec:
+  restartPolicy: OnFailure
+  containers:
+  - name: muj-container
+    image: alpine:latest
+    command:
+    - /bin/sh
+    - -c
+    - |
+      echo "CONFIG_DATABASE_HOST: ${CONFIG_DATABASE_HOST}"
+      echo "CONFIG_DATABASE_PORT: ${CONFIG_DATABASE_PORT}"
+      echo "CONFIG_DATABASE_USER: ${CONFIG_DATABASE_USER}"
+      echo "CONFIG_DATABASE_PASSWORD: ${CONFIG_DATABASE_PASSWORD}"
+      sleep infinity
+    env:
+    - name: CONFIG_DATABASE_HOST
+      valueFrom:
+        configMapKeyRef:
+          name: muj03-env-config
+          key: CONFIG_DATABASE_HOSTerror
+    - name: CONFIG_DATABASE_PORT
+      valueFrom:
+        configMapKeyRef:
+          name: muj03-env-config
+          key: CONFIG_DATABASE_PORT
+    - name: CONFIG_DATABASE_USER
+      valueFrom:
+        configMapKeyRef:
+          name: muj03-env-config
+          key: CONFIG_DATABASE_USER
+    - name: CONFIG_DATABASE_PASSWORD
+      valueFrom:
+        configMapKeyRef:
+          name: muj03-env-config
+          key: CONFIG_DATABASE_PASSWORD
